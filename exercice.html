@@ -1,43 +1,107 @@
-<html>
-    <head>
-        <title>My exercice App</title>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
 
-    <body>
-        <button>greeting</button>
+    let todo1 = 99;
+    
 
-        <script>
-         let s = 'a';
+    let month = 'November';
+    let dayOfMonth = 9;
+    let year = 2021;
 
-         console.log(s);
-        
-         
-     function greeting(firstName) {
-         
-         console.log('Hello  '+ firstName);
-        
-        }
+    console.log(month+' '+dayOfMonth+', '+year);
 
-        greeting('simon');
-        greeting('isaac')
+    let result = 4 + 5 * 3;
+    console.log(result);
 
-        function toUpper (str) {
+    let sum = (4+5)*3;
+    console.log(sum);
 
-            console.log(str.toUpperCase());
-        }
+    let age = 25;
+    let message = 'I am ' +age+ ' years old';
+    console.log(message);
+    
+    
+    function greeting (firstName) {
+       console.log('Hello '+ firstName);
 
-        toUpper('isaac');
+    }
 
-        toUpper('ruth'); 
+    greeting('Simon');
+
+     function toUpper (str) {
        
-        
-     function inchToCm(length) {
-        console.log(length * 2.54);
-        }
-        inchToCm(10);
-                
-                
-        </script>
+      let res = str.toUpperCase();
+       console.log(res);
+     }
 
-    </body>
+    toUpper('jean');
+
+    function convert (count) {
+     let c = count * 2.54;
+     console.log(c);
+      }
+
+      convert(6);
+
+    
+      
+
+      function toUpper1 (arr) {
+        let tableau = []
+
+      arr.forEach(function (tab) {
+        
+        tableau.push(tab.toUpperCase());
+        
+      });
+      
+      console.log([tableau]);
+      }
+
+      toUpper1(['hello', 'world']);
+
+      toUpper1(['ecric', 'isaac']);
+
+
+      function arrayDouble (double) {
+
+        let arrays = [];
+
+        double.forEach (function (func) {
+
+          arrays.push(func);
+          arrays.push(func);
+        })
+
+        console.log(arrays);
+      }
+
+      arrayDouble(['zacharie', 'heritier'])
+
+      function arraySum  (arrs) {
+
+      
+         let total = 0;
+
+         arrs.forEach (function (fors) {
+           
+          total = total + fors;
+
+         })
+
+         console.log(total);
+
+      }
+
+      arraySum([5,-2,7,0]);
+  </script>
+</body>
 </html>
