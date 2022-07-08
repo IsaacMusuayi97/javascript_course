@@ -7,7 +7,56 @@
   <title>Document</title>
 </head>
 <body>
+
+ 
+  <button id="todo-button" onclick="changeText () ">click
+  </button>
+
+  <div id="counter">0</div>
+
+   <button onclick="counterUp ()">Up</button>
+
+   <button onclick="countDown ()">Down</button>
+
+
+   <button onclick=" add ()">click</button>
+   <input id="exercice-title" type="text">
   <script>
+    
+    function add () {
+       let textbox = document.getElementById('exercice-title');
+       let containerDiv = document.createElement('div');
+       let title =  textbox.value;
+
+       containerDiv.innerText = title; 
+       document.body.appendChild(containerDiv);
+
+       
+    }
+
+   let count = 0;
+
+    function counterUp () {
+      
+      let container = document.getElementById('counter');
+      container.innerText = count ++;
+        
+      }
+
+     function countDown () {
+      
+
+      let container = document.getElementById('counter');
+      container.innerText = count --;
+     }
+
+
+
+ function changeText () {
+   let textbox = document.getElementById('todo-button');
+   textbox.innerText = 'Done';
+ }
+
 
     let todo1 = 99;
     
@@ -71,17 +120,16 @@
       toUpper1(['ecric', 'isaac']);
 
 
-      function arrayDouble (double) {
+      function arrayDouble (arr) {
 
-        let arrays = [];
+        let array = [];
 
-        double.forEach (function (func) {
+        arr.forEach (function (str) {
 
-          arrays.push(func);
-          arrays.push(func);
+          array.push(str, str);
         })
 
-        console.log(arrays);
+        console.log(array);
       }
 
       arrayDouble(['zacharie', 'heritier'])
@@ -102,6 +150,8 @@
       }
 
       arraySum([5,-2,7,0]);
+
+
   </script>
 </body>
 </html>
