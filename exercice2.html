@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+
+        function aboveFreezing(temps) {
+            // Assume we're using Fahrenheit
+            const tempsAboveFreezing = temps.filter(function (temp) {
+                return temp > 32;
+            });
+
+            return tempsAboveFreezing;
+        }
+      console.log( aboveFreezing([40, 67, 8, 29, 100, -3, 0])) ;
+
+
+        function removeRed(foodArray) {
+  // Instead of saving the filtered array in a variable,
+  // we can return it in the same line.
+  return foodArray.filter(function (food) {
+    return food.color !== 'red';
+  });
+}
+console.log(removeRed([{ name: 'Apple', color: 'red' }, { name: 'Egg', color: 'white' }]));
+   
+   
+   </script>
+</body>
+
+</html>

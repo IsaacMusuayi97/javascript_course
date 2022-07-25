@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+function pickFruits (fruitArray) {
+    let fruitsPicked = 0;
+
+    const filteredArray = fruitArray.filter(function (fruit) {
+    
+if (fruitsPicked >=2) {
+
+    return true;
+} else if (fruit === 'apple' && 'orange') {
+
+    fruitsPicked = fruitsPicked + 2;
+
+    return false;
+} else {
+    return true;
+}
+      
+    })
+}
+
+
+console.log(pickFruits(['cherry', 'apple', 'orange', 'apple', 'banana', 'apple']));
+
+
+
+
+// function minNonNegative(numArray) {
+//   let min = Infinity;
+
+//   numArray.forEach(function (num) {
+//     if (num < 0) {
+//       return;
+      
+//     } else if (num < min) {
+//       min = num
+//     }
+//   });
+
+//   return min;
+// }
+//  console.log(minNonNegative([1, 5, -2, 4, 3, 5, 0]));
+
+
+
+//         function max(numArray) {
+
+//             let max = - Infinity;
+
+//             numArray.forEach(function (num) {
+
+//                 if (num > max) {
+//                     max = num;
+//                 }
+//             })
+
+//             return max;
+
+//         }
+
+
+//         function min (a){
+//           return  Math.min(...a)
+//         }
+
+
+
+//        console.log(min([1, 2, 0, -3, 1]));
+
+
+
+//         function min (numArray) {
+
+//             let max = Infinity;
+
+//             numArray.forEach(function (num) {
+
+//                 if (num < max) {
+//                     max = num;
+                    
+//                 }
+//             })
+
+//             return max;
+            
+
+//         }
+
+//         min([1, 2, 0, -3, 1]);
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="receipt"> </div>
+
+    <div id="recevoir"></div>
+
+    <script>
+
+
+
+
+
+
+
+
+
+
+
+        function cartTotal(cartArray) {
+
+            let total = 0;
+
+            cartArray.forEach(function (item) {
+                total = total + item.price * item.quantity;
+
+            });
+
+            console.log(total);
+
+        }
+
+        cartTotal([
+            { name: 'Appel', price: 4, quantity: 2 },
+            { name: 'Orange', price: 3, quantity: 3 }
+        ]);
+
+
+        function displayReceipt(arr) {
+
+            let receipt = document.getElementById('receipt');
+            let divTotal = document.createElement('div');
+
+            let sum = 0;
+
+            arr.forEach(function (art) {
+
+                let div = document.createElement('div');
+
+                sum = sum + art.price * art.quantity;
+
+                div.innerText = art.name + ' ' + '$' + art.price + ' * ' + art.quantity + ' = ' + '$' + art.price * art.quantity;
+                divTotal.innerText = 'Cart' + ' total' + ' = ' + '$' + sum;
+
+                receipt.appendChild(div);
+                receipt.appendChild(divTotal);
+            })
+
+        }
+
+        let total = 0;
+
+        function createCart(foodPrices) {
+            const foods = Object.keys(foodPrices);
+
+            foods.forEach(function (food) {
+                const cartItem = document.createElement('div');
+
+                const foodPrice = foodPrices[food];
+                cartItem.innerText = food + ' $' + foodPrice;
+
+                const addButton = document.createElement('button');
+                addButton.innerText = 'Add';
+
+                addButton.onclick = function () {
+                    total = total + foodPrice;
+                };
+
+                cartItem.appendChild(addButton);
+
+
+                document.body.appendChild(cartItem);
+            });
+        }
+
+        createCart({ Apple: 3, Orange: 4, Egg: 2 });
+
+
+
+        displayReceipt([
+            { name: 'Orange', price: 3, quantity: 3 },
+            { name: 'Appel', price: 4, quantity: 2 }
+
+        ]);
+
+
+        function removeRed(foodArray) {
+          
+            return foodArray.filter(function (food) {
+                return food.color !== 'red';
+            });
+        }
+      console.log( removeRed([{ name: 'Apple', color: 'red' }, { name: 'Egg', color: 'white' }])); 
+
+
+        // function removeRed(foodArray) {
+
+
+
+        //     return foodArray.filter(function (red) {
+
+        //         return red.color !== 'red';
+
+
+        //     });
+
+        // }
+
+
+        // removeRed([{ name: 'Apple', color: 'red' }, { name: 'egg', color: 'white' }]);
