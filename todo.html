@@ -54,9 +54,11 @@
                 dueDate: dueDate,
                 id: id
             });
-            // saveTodos();
+            saveTodos();
         }
 
+
+        // Deletes a todo
         function removeTodo(idToDelete) {
             todos = todos.filter(function (todo) {
                 // if the id of this todo matches idToDelete, return false
@@ -69,25 +71,49 @@
                 }
             });
 
-            // saveTodos();
+            saveTodos();
         }
 
 
-        function toggleTodo(todoId, checked) {
 
+        function setEditing(todoId) {
             todos.forEach(function (todo) {
-
                 if (todo.id === todoId) {
-
-                    todo.isDone = checked;
+                    todo.isEditing = true;
                 }
             });
+
+            saveTodos();
         }
 
-        // function saveTodos() {
+        function updateTodo(todoId, newTitle, newDate) {
+            todos.forEach(function (todo) {
+                if (todo.id === todoId) {
+                    todo.title = newTitle;
+                    todo.dueDate = newDate;
+                    todo.isEditing = false;
+                }
+            });
 
-        //     localStorage.setItem('todos', JSON.stringify(todos));
+            saveTodos();
+        }
+
+
+        // function toggleTodo(todoId, checked) {
+
+        //     todos.forEach(function (todo) {
+
+        //         if (todo.id === todoId) {
+
+        //             todo.isDone = checked;
+        //         }
+        //     });
         // }
+
+        function saveTodos() {
+
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
 
 
 
@@ -114,66 +140,150 @@
             render();
         }
 
-        function checkTodo(event) {
 
-            const checkbox = event.target;
+        // I forgot to mention: usually for these click handler function we like to name them
+        // starting  with "on" (onAdd, onDelete, onEdit, etc.) I'll revise for the 2022 tutorial!
+        function onEdit(event) {
+            const editButton = event.target;
+            const todoId = editButton.dataset.todoId;
 
-            const todoId = checkbox.dataset.todoId;
-            const checked = checkbox.checked;
-
-            toggleTodo(todoId, checked);
-
+            setEditing(todoId);
             render();
         }
 
+        function onUpdate(event) {
+            const updateButton = event.target;
+            const todoId = updateButton.dataset.todoId;
 
-        // View
-        function render() {
+            const textbox = document.getElementById('edit-title-' + todoId);
+            const newTitle = textbox.value;
 
-            //    reset our list
+            const datePicker = document.getElementById('edit-date-' + todoId);
+            const newDate = datePicker.value;
 
-            document.getElementById('todo-list').innerHTML = '';
-
-            // todos.forEach(function (todo) {
-            // let element = document.createElement('div');
-            // element.innerText = todo.title +' '+ todo.dueDate;
-
-            todos.forEach(function (todo) {
-
-                const element = document.createElement('div');
-                element.innerText = todo.title + ' ' + todo.dueDate;
-
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.onchange = checkTodo;
-                checkbox.dataset.todoId = todo.id;
-                if (todo.isDone === true) {
-                    checkbox.checked = true;
-                } else {
-                    checkbox.checked = false;
-                }
-                element.prepend(checkbox);
-
-
-
-
-                const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'Delete';
-                deleteButton.style = 'margin-left: 12px;';
-                deleteButton.onclick = deleteTodo;
-                deleteButton.id = todo.id;
-                element.appendChild(deleteButton);
-                element.prepend(checkbox);
-
-
-
-                let todoList = document.getElementById('todo-list');
-                todoList.appendChild(element);
-            })
-
+            updateTodo(todoId, newTitle, newDate);
+            render();
         }
 
-        render();
+        // function checkTodo(event) {
+
+        //     const checkbox = event.target;
+
+        //     const todoId = checkbox.dataset.todoId;
+        //     const checked = checkbox.checked;
+
+        //     toggleTodo(todoId, checked);
+
+        //     render();
+        // }
+
+
+        // View
+
+        function render() {
+        // reset our list
+        document.getElementById('todo-list').innerHTML = '';
+
+        todos.forEach(function (todo) {
+          const element = document.createElement('div');
+
+           // If this todo is being edited, render a textbox, date picker and a
+          // button for saving the edits.
+          if (todo.isEditing === true) {
+            const textbox = document.createElement('input');
+            textbox.type = 'text';
+            textbox.id = 'edit-title-' + todo.id;
+            element.appendChild(textbox);
+
+            const datePicker = document.createElement('input');
+            datePicker.type = 'date';
+            datePicker.id = 'edit-date-' + todo.id;
+            element.appendChild(datePicker);
+
+            const updateButton = document.createElement('button');
+            updateButton.innerText = 'Update';
+            updateButton.dataset.todoId = todo.id;
+            updateButton.onclick = onUpdate;
+            element.appendChild(updateButton);
+
+          // If this todo is not being edited, render what we had before
+          // and add an "Edit" button.
+          } else {
+            element.innerText = todo.title + ' ' + todo.dueDate;
+
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.style = 'margin-left: 12px';
+            editButton.onclick = onEdit;
+            editButton.dataset.todoId = todo.id;
+            element.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.style = 'margin-left: 12px';
+            deleteButton.onclick = deleteTodo;
+            deleteButton.id = todo.id;
+            element.appendChild(deleteButton);
+          }
+
+          const todoList = document.getElementById('todo-list');
+          todoList.appendChild(element);
+        });
+      }
+
+      render();
+
+
+
+
+
+
+        // function render() {
+
+        //     //    reset our list
+
+        //     document.getElementById('todo-list').innerHTML = '';
+
+        //     // todos.forEach(function (todo) {
+        //     // let element = document.createElement('div');
+        //     // element.innerText = todo.title +' '+ todo.dueDate;
+
+        //     todos.forEach(function (todo) {
+
+        //         const element = document.createElement('div');
+        //         element.innerText = todo.title + ' ' + todo.dueDate;
+
+        //         const checkbox = document.createElement('input');
+        //         checkbox.type = 'checkbox';
+        //         checkbox.onchange = checkTodo;
+        //         checkbox.dataset.todoId = todo.id;
+        //         if (todo.isDone === true) {
+        //             checkbox.checked = true;
+        //         } else {
+        //             checkbox.checked = false;
+        //         }
+        //         element.prepend(checkbox);
+
+
+
+
+        //         const deleteButton = document.createElement('button');
+        //         deleteButton.innerText = 'Delete';
+        //         deleteButton.style = 'margin-left: 12px;';
+        //         deleteButton.onclick = deleteTodo;
+        //         deleteButton.id = todo.id;
+        //         element.appendChild(deleteButton);
+        //         element.prepend(checkbox);
+
+
+
+        //         let todoList = document.getElementById('todo-list');
+        //         todoList.appendChild(element);
+        //     })
+
+        // }
+
+    
     </script>
 </body>
 
